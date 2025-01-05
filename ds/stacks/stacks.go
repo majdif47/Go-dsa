@@ -1,10 +1,6 @@
-
-
 package stacks
 
-
 import "errors"
-
 
 type Stack struct {
   elements []int
