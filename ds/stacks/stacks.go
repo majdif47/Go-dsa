@@ -23,7 +23,7 @@ func (s *Stack) Push(x int) {
 }
 
 func (s *Stack) Pop() (int, error) {
-  if s.isEmpty() {
+  if s.IsEmpty() {
     return 0, errors.New("Stack is empty")
   }
   top := s.elements[len(s.elements)-1]
@@ -36,13 +36,13 @@ func (s *Stack) Size() int {
 }
 
 func (s *Stack) Peek() (int, error) {
-  if s.isEmpty() {
+  if s.IsEmpty() {
     return 0, errors.New("Stack is empty")
   }
   return s.elements[len(s.elements)-1], nil
 }
 
-func (s *Stack) isEmpty() bool {
+func (s *Stack) IsEmpty() bool {
   return len(s.elements) == 0
 }
 
