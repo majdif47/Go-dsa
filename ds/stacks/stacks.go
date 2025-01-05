@@ -2,47 +2,49 @@ package stacks
 
 import "errors"
 
-type Stack struct {
-  elements []int
+type Stack[T any] struct {
+  elements []T
 }
 
-func NewStack() *Stack {
-  return &Stack{
-    elements: []int{},
+func NewStack[T any]() *Stack[T] {
+  return &Stack[T]{
+    elements: []T{},
   }
 }
 
 
 
-func (s *Stack) Push(x int) {
-  s.elements = append(s.elements, x)
+func (s *Stack[T]) Push(value T) {
+  s.elements = append(s.elements, value)
 }
 
-func (s *Stack) Pop() (int, error) {
+func (s *Stack[T]) Pop() (T, error) {
   if s.IsEmpty() {
-    return 0, errors.New("Stack is empty")
+    var zeroValue T
+    return zeroValue, errors.New("Stack is empty")
   }
   top := s.elements[len(s.elements)-1]
   s.elements = s.elements[:len(s.elements)-1]
   return top, nil
 }
 
-func (s *Stack) Size() int {
+func (s *Stack[T]) Size() int {
   return len(s.elements)
 }
 
-func (s *Stack) Peek() (int, error) {
+func (s *Stack[T]) Peek() (T, error) {
   if s.IsEmpty() {
-    return 0, errors.New("Stack is empty")
+    var zeroValue T
+    return zeroValue, errors.New("Stack is empty")
   }
   return s.elements[len(s.elements)-1], nil
 }
 
-func (s *Stack) IsEmpty() bool {
+func (s *Stack[T]) IsEmpty() bool {
   return len(s.elements) == 0
 }
 
-func (s *Stack) Empty() {
+func (s *Stack[T]) Empty() {
   s.elements = nil
 }
 
